@@ -76,8 +76,18 @@ public class StudentForm extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButton1.setText("Find");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("New");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Save");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +97,11 @@ public class StudentForm extends javax.swing.JFrame {
         });
 
         jButton4.setText("Update");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Delete");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -206,7 +221,13 @@ public class StudentForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMobileActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        student.setId(Integer.parseInt(txtRoll.getText()));
+        student.setName(txtName.getText());
+        student.setEmail(txtEmail.getText());
+        student.setMobile(Integer.parseInt(txtMobile.getText()));
+        if (mem.delete(student)) {
+            JOptionPane.showMessageDialog(rootPane, "Data Dleted");
+        }else JOptionPane.showMessageDialog(rootPane, "Error");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -226,9 +247,33 @@ public class StudentForm extends javax.swing.JFrame {
         else JOptionPane.showMessageDialog(rootPane, "An error ocured !!!");
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        student.setName(txtName.getText());
+        student.setEmail(txtEmail.getText());
+        student.setMobile(Integer.parseInt(txtMobile.getText()));
+        
+        if (mem.update(student)) {
+            JOptionPane.showMessageDialog(rootPane, "Your data updated successfully !!!");
+        }
+        else JOptionPane.showMessageDialog(rootPane, "An error ocured !!!");
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int rollNumber = Integer.parseInt(JOptionPane.
+                showInputDialog("Insert Student Roll Number?"));
+        student =(Student) mem.find(Student.class, rollNumber);
+        if (student != null) {
+            txtRoll.setText(student.getId().toString());
+            txtName.setText(student.getName());
+            txtEmail.setText(student.getEmail());
+            txtMobile.setText(student.getMobile().toString());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        clean();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public static void open() {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -246,6 +291,12 @@ public class StudentForm extends javax.swing.JFrame {
                 new StudentForm().setVisible(true);
             }
         });
+    }
+    public void clean(){
+        txtRoll.setText("");
+        txtName.setText("");
+        txtEmail.setText("");
+        txtMobile.setText("");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
