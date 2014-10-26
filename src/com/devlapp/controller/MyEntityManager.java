@@ -14,7 +14,6 @@ public class MyEntityManager {
             em.persist(object);
             em.getTransaction().commit();
         } catch (Exception e) {
-            e.printStackTrace();
             em.getTransaction().rollback();
             return false;
         } finally {
@@ -22,7 +21,7 @@ public class MyEntityManager {
         }
         return true;
     }
-    
+    //update
     public boolean update(Object object) {
         em.getTransaction().begin();
         try {
@@ -50,19 +49,11 @@ public class MyEntityManager {
         }
         return  true;
     }
-    //Added for find function
+    //find function
     public Object find(Class objectClass,Object id)
     {
         return em.find(objectClass, id);
     }
-    
-    
-    
-    
-    
-    
-
-    
 
 
 }
