@@ -14,8 +14,8 @@ Technology using:
 * Java Swing
 
 Database Config:
-host: localhost
-user: admin
-password: admin
-port: 3306
-driver: MySql J Driver
+* host: localhost
+* user: admin
+* password: admin
+* port: 3306
+* driver: MySql J Driver
